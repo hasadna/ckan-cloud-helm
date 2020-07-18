@@ -1,0 +1,37 @@
+name: CI
+on:
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - env:
+        CKAN_CLOUD_HELM_DEPLOY_KEY: ${{ secrets.CKAN_CLOUD_HELM_DEPLOY_KEY }}
+      run: |
+        if ! git log -1 --pretty=format:"%s" | grep -- --no-deploy; then
+          curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh &&\
+          chmod 700 get_helm.sh &&\
+          ./get_helm.sh --version "v2.16.9" &&\
+          helm version --client && rm ./get_helm.sh &&\
+          helm init --client-only &&\
+          cd charts_repository &&\
+          helm package ../ckan --version "0.0.0-${GITHUB_SHA}" &&\
+          helm repo index --url https://raw.githubusercontent.com/hasadna/ckan-cloud-helm/master/charts_repository/ . &&\
+          TEMPDIR=`mktemp -d` &&\
+          mv "ckan-0.0.0-${GITHUB_SHA}.tgz" $TEMPDIR/ &&\
+          mv index.yaml $TEMPDIR/ &&\
+          cd $TEMPDIR &&\
+          echo "${CKAN_CLOUD_HELM_DEPLOY_KEY}" > deploy_key &&\
+          chmod 400 deploy_key &&\
+          export GIT_SSH_COMMAND="ssh -i ${TEMPDIR}/deploy_key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" &&\
+          git clone git@github.com:hasadna/ckan-cloud-helm.git &&\
+          git config --global user.name "Ckan Cloud Helm CI" &&\
+          git config --global user.email "ckan-cloud-helm-ci@localhost" &&\
+          cd ckan-cloud-helm &&\
+          cp -f "../ckan-0.0.0-${GITHUB_SHA}.tgz" charts_repository/ &&\
+          cp -f ../index.yaml charts_repository/ &&\
+          git add "charts_repository/ckan-0.0.0-${GITHUB_SHA}.tgz" "charts_repository/index.yaml" &&\
+          git commit -m "automatic update of charts_repository --no-deploy" &&\
+          git push origin master
+        fi
