@@ -1,26 +1,34 @@
-{{ if .Values.useNginxIngress }}
+{{ if .Values.ingresses }}
+{{ range .Values.ingresses }}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ckan-ingress-ingress
+  name: {{ .name }}
   annotations:
     kubernetes.io/ingress.class: nginx
+    {{ if .ckanService }}
     nginx.ingress.kubernetes.io/rewrite-target: /$1
-    nginx.ingress.kubernetes.io/proxy-body-size: {{ .Values.nginxIngressMaxBodySize | default "1000M" }}
-{{ if .Values.nginxIngressExtraConfig}}{{ .Values.nginxIngressExtraConfig | indent 4 }}{{ end }}
+    nginx.ingress.kubernetes.io/proxy-body-size: {{ .maxBodySize | default "1000M" }}
+    {{ end }}
+{{ if .extraConfig}}{{ .extraConfig | indent 4 }}{{ end }}
 spec:
-  {{ if .Values.nginxIngressTlsSecret }}
+  {{ if .tls }}
   tls:
   - hosts:
-    - {{ .Values.domain }}
-    secretName: {{ .Values.nginxIngressTlsSecret }}
+    {{ range .rules }}
+    - {{ .host }}
+    {{ end }}
+    secretName: ingress-{{ .name }}
   {{ end }}
   rules:
-  - host: {{ .Values.domain }}
+  {{ range .rules }}
+  - host: {{ .host }}
     http:
       paths:
       - backend:
-          serviceName: ckan
-          servicePort: 5000
-        path: /(.*)
+          serviceName: {{ .serviceName | default "ckan" }}
+          servicePort: {{ .servicePort | default "5000" }}
+  {{ end }}
+---
+{{ end }}
 {{ end }}
