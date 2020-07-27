@@ -28,6 +28,9 @@ spec:
       - backend:
           serviceName: {{ .serviceName | default "ckan" }}
           servicePort: {{ .servicePort | default "5000" }}
+        {{ if not .serviceName }}
+        path: /(.*)
+        {{ end }}
   {{ end }}
 ---
 {{ end }}
