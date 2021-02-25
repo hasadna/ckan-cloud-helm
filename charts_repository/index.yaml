@@ -1,34 +1,40 @@
 apiVersion: v1
 entries:
   ckan:
-  - created: "2020-10-08T12:46:39.683936726Z"
+  - created: "2021-02-25T10:34:11.587246996Z"
     digest: 4c1e23c732114fe072aac4cea68c7021e9381e8ea09738d9eb91f305df503d8f
     name: ckan
     urls:
     - https://raw.githubusercontent.com/hasadna/ckan-cloud-helm/master/charts_repository/ckan-0.0.0-eb40d6faa09ed9eb46bf468a84d2a8e847b2c29e.tgz
     version: 0.0.0-eb40d6faa09ed9eb46bf468a84d2a8e847b2c29e
-  - created: "2020-10-08T12:46:39.681593832Z"
+  - created: "2021-02-25T10:34:11.586536501Z"
     digest: 0c85c6d5577bed30c189685a93c2963791ad3ed1b065f8891ac066247f2ffac5
     name: ckan
     urls:
     - https://raw.githubusercontent.com/hasadna/ckan-cloud-helm/master/charts_repository/ckan-0.0.0-a98a4e8aef3037c1c9bf18bb9794e94e0e87e667.tgz
     version: 0.0.0-a98a4e8aef3037c1c9bf18bb9794e94e0e87e667
-  - created: "2020-10-08T12:46:39.680748234Z"
+  - created: "2021-02-25T10:34:11.585771206Z"
     digest: 8b12f4680705315aad1219ae66de95924c60bd62212e6573f3d64b084e45cd6c
     name: ckan
     urls:
     - https://raw.githubusercontent.com/hasadna/ckan-cloud-helm/master/charts_repository/ckan-0.0.0-9f9ec66e264e5e8c91f49cf9e47696be787a7453.tgz
     version: 0.0.0-9f9ec66e264e5e8c91f49cf9e47696be787a7453
-  - created: "2020-10-08T12:46:39.679966136Z"
+  - created: "2021-02-25T10:34:11.584935211Z"
     digest: 7aea8a559296efe0545c242d81a7ef7d04ac7f412ad8adbd9dbd0fcc1442b9ee
     name: ckan
     urls:
     - https://raw.githubusercontent.com/hasadna/ckan-cloud-helm/master/charts_repository/ckan-0.0.0-881cee9c8eb91e3f411351bfe4e382868c275a9a.tgz
     version: 0.0.0-881cee9c8eb91e3f411351bfe4e382868c275a9a
-  - created: "2020-10-08T12:46:39.679170238Z"
+  - created: "2021-02-25T10:34:11.584283916Z"
     digest: 43befb175c90bef8e671aa7f070d159f9c6918e733dad7424d3bd9e1c86233b5
     name: ckan
     urls:
     - https://raw.githubusercontent.com/hasadna/ckan-cloud-helm/master/charts_repository/ckan-0.0.0-7f649785c28147eaf0f4e3cd38ac84119d9f912e.tgz
     version: 0.0.0-7f649785c28147eaf0f4e3cd38ac84119d9f912e
-generated: "2020-10-08T12:46:39.67812344Z"
+  - created: "2021-02-25T10:34:11.58363322Z"
+    digest: 9e8eebfe1ff48a4d0f48653b69a73430ba5e01062ca59f4eae22d110eed39007
+    name: ckan
+    urls:
+    - https://raw.githubusercontent.com/hasadna/ckan-cloud-helm/master/charts_repository/ckan-0.0.0-36a9163c5b5d5ab410e1e44577e48c5ca49bfbab.tgz
+    version: 0.0.0-36a9163c5b5d5ab410e1e44577e48c5ca49bfbab
+generated: "2021-02-25T10:34:11.582721926Z"
